@@ -1,5 +1,5 @@
-# ModernCalculator Day 2
 # Modern Calculator Web App
+Day 2
 https://stellardevtalha.github.io/ModernCalculator/
 Responsive layout 
 Glass-mrphism design
