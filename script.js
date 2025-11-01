@@ -60,9 +60,10 @@ const calc = () => {
 // Buttons
 buttons.forEach(b => b.addEventListener("click", () => {
   const v = b.dataset.val;
-  v === "=" ? calc() : addValue(v);
+  if (v === "=") calc();
+  else if (v === "back") display.value = display.value.slice(0, -1);
+  else addValue(v);
 }));
-
 // Keyboard
 window.addEventListener("keydown", e => {
   const k = e.key;
