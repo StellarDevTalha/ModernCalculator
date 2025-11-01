@@ -1,63 +1,306 @@
-/* GLOBAL RESET */
-*{
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Theme Variables */
+/* ===== THEME VARIABLES ===== */
 :root {
-  --bg1:#1f1c2c;
-  --bg2:#241b3a;
-  --glass:rgba(255,255,255,0.08);
-  --text:#fff;
-  --muted:rgba(255,255,255,0.75);
-  --accent:linear-gradient(45deg,#00bcd4,#4caf50);
-  --shadow:0 8px 30px rgba(0,0,0,0.35);
-  --op:#ffd54f;
+  /* Default Dark Theme */
+  --bg1: #1f1c2c;
+  --bg2: #2a2340;
+  --glass: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+  --accent: linear-gradient(45deg, #00bcd4, #4caf50);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --op: #ffd54f;
+  --btn-hover: rgba(255, 255, 255, 0.2);
+  --result: #00ffae;
 }
+
 body[data-theme="light"] {
-  --bg1:#f3f6fb; --bg2:#e8eef8; --glass:rgba(0,0,0,0.05);
-  --text:#111827; --muted:rgba(0,0,0,0.6);
-  --shadow:0 8px 30px rgba(0,0,0,0.1); --op:#ff8a65;
+  /* Modern Light Theme */
+  --bg1: #f8faff;
+  --bg2: #e6ecf5;
+  --glass: rgba(255, 255, 255, 0.9);
+  --text: #1e1e2f;
+  --muted: #555;
+  --accent: linear-gradient(45deg, #4facfe, #00f2fe);
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --op: #ff7043;
+  --btn-hover: rgba(0, 0, 0, 0.1);
+  --result: #00796b;
 }
 
-/* BODY */
+/* ===== TRANSITIONS ===== */
+body, .calculator, .btn, .display {
+  transition: background 0.6s ease, color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ===== BODY ===== */
 body {
-  min-height:100vh;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  color:var(--text);
-  display:flex; flex-direction:column; align-items:center;
-  padding:20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-
-/* HEADER */
+/* ===== HEADER ===== */
 .header-content {
-  display:flex; justify-content:space-between; align-items:center;
-  width:100%; max-width:900px; margin-bottom:20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
 }
 h1 {
-  font-size:1.8rem;
-  background:var(--accent);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  font-size: 1.8rem;
+  background: var(--accent);
+ /* Gradient text that works everywhere */
+background-image: linear-gradient(45deg, #00bcd4, #4caf50);
+background-clip: text;
+-webkit-background-clip: text;  /* for Chrome/Safari */
+color: transparent;
+-webkit-text-fill-color: transparent; /* needed for Safari */
 }
-.header p { color:var(--muted); font-size:0.95rem; }
+.header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 .icon-btn {
-  background:none; border:none; color:var(--text); font-size:1.2rem;
-  cursor:pointer; padding:6px; border-radius:6px; transition:0.2s;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: 0.2s;
 }
-.icon-btn:hover { background:rgba(255,255,255,0.1); }
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
 
-/* Calculator Card */
-.calculator{
-    width:340px; background: var(--glass);border-radius: 20px;
-    box-shadow: var(--shadow); backdrop-filter: blur(10px);
-    padding: 20px;
+/* ===== CALCULATOR CARD ===== */
+.calculator {
+  width: 340px;
+  background: var(--glass);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+}
+.display {
+  width: 100%;
+  height: 70px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  font-size: 2rem;
+  text-align: right;
+  padding-right: 10px;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+.btn {
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.op {
+  color: var(--op);
+  font-weight: 600;
+}
+.btn.equal {
+  background: var(--accent);
+  color: #fff;
+}
+.btn.zero {
+  grid-column: span 2;
+}
+.btn:hover {
+  background: var(--btn-hover);
+  transform: scale(1.05);
+}
+.btn:active {
+  transform: scale(0.92);
+}
+
+/* ===== RESULT + HISTORY ===== */
+.result {
+  margin-top: 10px;
+  color: var(--result);
+  font-weight: 600;
+  min-height: 24px;
+}
+.history {
+  margin-top: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+}
+.history h3 {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+#historyList {
+  list-style: none;
+  max-height: 130px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#historyList li {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.small-btn {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+/* ====== FOOTER STYLING ====== */
+/* ===== STYLISH FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  background: var(--glass, rgba(255, 255, 255, 0.08));
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted, #ccc);
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+}
+
+footer:hover {
+  transform: translateY(-2px);
+  color: var(--text, #fff);
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Footer link styling */
+footer a.footer-link {
+  font-weight: 600;
+  background: linear-gradient(45deg, #00bcd4, #4caf50);
+  /* Gradient text that works everywhere */
+background-image: linear-gradient(45deg, #00bcd4, #4caf50);
+background-clip: text;
+-webkit-background-clip: text;  /* for Chrome/Safari */
+color: transparent;
+-webkit-text-fill-color: transparent; /* needed for Safari */
+
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+footer a.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(45deg, #00bcd4, #4caf50);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+footer a.footer-link:hover {
+  letter-spacing: 0.5px;
+  filter: brightness(1.2);
+}
+
+footer a.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Heart animation */
+footer .heart {
+  color: #ff4d6d;
+  animation: pulse 1.4s infinite;
+}
+
+/* Pulse effect */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* ===== LIGHT MODE ADJUSTMENT ===== */
+body[data-theme="light"] footer {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text, #222);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -3px 20px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] footer:hover {
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+}
+
+body[data-theme="light"] footer a.footer-link {
+  background: linear-gradient(45deg, #2196f3, #00bcd4);
+  /* Gradient text that works everywhere */
+background-image: linear-gradient(45deg, #00bcd4, #4caf50);
+background-clip: text;
+-webkit-background-clip: text;  /* for Chrome/Safari */
+color: transparent;
+-webkit-text-fill-color: transparent; /* needed for Safari */
+
 }
 
 
-
-
-
+/* ===== RESPONSIVE ===== */
+@media (max-width: 420px) {
+  .calculator {
+    width: 92%;
+  }
+  .display {
+    height: 60px;
+    font-size: 1.6rem;
+  }
+  .btn {
+    height: 52px;
+    font-size: 1rem;
+  }
+}
