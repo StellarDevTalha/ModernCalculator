@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Day 2 - Modern Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+    <header class="header">
+        <div class="header-content">
+            <div>
+                 <h1>✨ StellarDev Calculator</h1>
+                 <p>HTML + CSS + JS Practice - Day 2 </p>
+            </div>
+            <div class="header-actions">
+                 <button id="themeToggle" class="icon-btn" title="Toggle Theme">🌗</button>
+                 <button id="clearAll" class="icon-btn" title="Clear Display">🗑️</button>
+            </div>
+        </div>
+    </header>
+    <!-- Main Claculator -->
+     <main>
+        <section class="calculator">
+            <!-- Display -->
+          <input id="calcDisplay" class="display" type="text" placeholder="0" readonly />
+          <!-- Buttons -->
+           <div class="buttons">
+            <!-- Row 1 -->
+             <button class="btn op" data-val="C">C</button>
+             <button class="btn op" data-val="%">%</button>
+             <button class="btn op" data-val="/">÷</button>
+             <button class="btn op" data-val="*">×</button>
+
+            <!-- Row 2 -->
+             <button class="btn" data-val="8">8</button>
+             <button class="btn" data-val="8">8</button>
+             <button class="btn" data-val="9">9</button>
+             <button class="btn op" data-val="-">-</button>
+
+            <!-- Row 3 -->
+             <button class="btn" data-val="4">4</button>
+             <button class="btn" data-val="5">5</button>
+             <button class="btn" data-val="6">6</button>
+             <button class="btn op" data-val="+">+</button>
+
+            <!-- Row 4 -->
+             <button class="btn" data-val="1">1</button>
+             <button class="btn" data-val="2">2</button>
+             <button class="btn" data-val="3">3</button>
+             <button class="btn equal" data-val="=">=</button>
+
+            <!-- Row 5 -->
+             <button class="btn zero" data-val="0">0</button>
+             <button class="btn" data-val=".">.</button>
+           </div>
+
+           
+           <!-- Result -->
+            <p id="result" class="result">Result</p>
+
+            <!-- History -->
+             <div class="history">
+                <h3>History</h3>
+                <ul id="historyList"></ul>
+                <button id="clearHistory"  class="small-btn">Clear History</button>
+             </div>
+        </section>
+     </main>
+    
+
+    <!-- FOOTER  -->
+     <footer>
+        <p>Built With Luv by StellarDevTalha</p>
+     </footer>
+
+     <script src="script.js"></script>
+</body>
+</html>

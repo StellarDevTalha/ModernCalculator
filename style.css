@@ -1,0 +1,63 @@
+/* GLOBAL RESET */
+*{
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Theme Variables */
+:root {
+  --bg1:#1f1c2c;
+  --bg2:#241b3a;
+  --glass:rgba(255,255,255,0.08);
+  --text:#fff;
+  --muted:rgba(255,255,255,0.75);
+  --accent:linear-gradient(45deg,#00bcd4,#4caf50);
+  --shadow:0 8px 30px rgba(0,0,0,0.35);
+  --op:#ffd54f;
+}
+body[data-theme="light"] {
+  --bg1:#f3f6fb; --bg2:#e8eef8; --glass:rgba(0,0,0,0.05);
+  --text:#111827; --muted:rgba(0,0,0,0.6);
+  --shadow:0 8px 30px rgba(0,0,0,0.1); --op:#ff8a65;
+}
+
+/* BODY */
+body {
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  display:flex; flex-direction:column; align-items:center;
+  padding:20px;
+}
+
+
+/* HEADER */
+.header-content {
+  display:flex; justify-content:space-between; align-items:center;
+  width:100%; max-width:900px; margin-bottom:20px;
+}
+h1 {
+  font-size:1.8rem;
+  background:var(--accent);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.header p { color:var(--muted); font-size:0.95rem; }
+.icon-btn {
+  background:none; border:none; color:var(--text); font-size:1.2rem;
+  cursor:pointer; padding:6px; border-radius:6px; transition:0.2s;
+}
+.icon-btn:hover { background:rgba(255,255,255,0.1); }
+
+/* Calculator Card */
+.calculator{
+    width:340px; background: var(--glass);border-radius: 20px;
+    box-shadow: var(--shadow); backdrop-filter: blur(10px);
+    padding: 20px;
+}
+
+
+
+
+
